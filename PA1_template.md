@@ -3,7 +3,7 @@
 
 ## Loading and preprocessing the data
 
-First, unzip the file
+First step, unzip the file
 
 ```r
 unzip("activity.zip", setTimes=TRUE)
@@ -40,7 +40,7 @@ library(dplyr)
 
 ## What is mean total number of steps taken per day?
 
-Create a date factor and summarize into a new data frame
+Create a date factor, summarize into a new data frame
 
 ```r
 activity$date_f <- as.factor(activity$date)
@@ -62,7 +62,7 @@ hist(steps_per_day$totalsteps,
 
 
 ### Calculate and report the mean and median total number of steps taken per day
-# calculate mean and median
+#### Calculate mean and median
 
 ```r
 mean_steps_per_day = mean(steps_per_day$totalsteps)
@@ -98,7 +98,7 @@ interval_at_max <- levels(interval_avg_df$interval_f)[index_max]
 max_avg_steps <- interval_avg_df$avg_steps[index_max]
 ```
 
-The maximum number of average steps in a 5-minute interval is 206.1698113 and occurs at interval 835.
+The maximum number of average steps in a 5-minute interval is **206.1698113** and occurs at interval **835**.
 
 
 ## Imputing missing values
@@ -121,7 +121,7 @@ Number of missing values of variable **interval** = 0
 
 ### To fill in missing values, will use the average value for the 5-minute interval
 
-### Create a new data frame **new_act** that has the missing values filled in
+#### Create a new data frame **new_act** that has the missing values filled in
 
 ```r
 # get the indices (into the 'activity' df) that have NAs
@@ -147,7 +147,7 @@ new_act$new_steps <- new_act$steps
 new_act$new_steps[indices_nas] <- values_pos_avg_steps_df
 ```
 
-### verify there are no NAs in the new data
+#### verify there are no NAs in the new data
 
 ```r
 num_nas_new <- sum(is.na(new_act$new_steps))
@@ -173,7 +173,7 @@ hist(new_steps_per_day$totalsteps,
 
 ![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
 
-### Calculating mean and medain for the new dataset
+### Calculating mean and median for the new dataset
 
 
 ```r
@@ -182,8 +182,8 @@ mean_new_steps_per_day = mean(new_steps_per_day$totalsteps)
 median_new_steps_per_day = median(new_steps_per_day$totalsteps)
 ```
 
-The new **mean** number of steps per day = 1.0766189\times 10^{4}  
-The new **median** number of steps per day = 1.0766189\times 10^{4}
+The new **mean** number of steps per day = **1.0766189\times 10^{4}**  
+The new **median** number of steps per day = **1.0766189\times 10^{4}**
 
 ###  Do these values differ from the estimates from the first part of the assignment? 
 
@@ -198,12 +198,12 @@ percent_change_in_median = 100 * (change_in_median / median_steps_per_day)
 ```
 
 ### Impact:  
-* The **mean** increased by 1411.959171 (15.0943396%)
-* The **median** increased by 371.1886792 (3.5708387%)
+* The **mean** increased by **1411.959171** (15.0943396%)
+* The **median** increased by **371.1886792** (3.5708387%)
 
 ### What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-Answer:
+**Answer:**
 The impact of imputing missing data on the estimates is that the estimates went up.  
 This is not surprising given that the missing data was essentially counted as 0
 
@@ -243,7 +243,8 @@ new_interval_avg_df <- summarise(group_by(new_act, interval_f, day_type),
 print(ggplot(new_interval_avg_df, aes(x=interval_f,y=avg_steps, group=1)) 
       + geom_line() 
       + facet_wrap(~ day_type, ncol=1)
-      + labs(title="Average steps per 5-minute interval", x="Interval", y="Average steps"))
+      + labs(title="Average steps per 5-minute interval", x="Interval", y="Average steps")
+      + scale_x_discrete(breaks=c(0, 300, 600, 900, 1200, 1500, 1800, 2100, 2355)))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-15-1.png) 
