@@ -58,7 +58,7 @@ hist(steps_per_day$totalsteps,
            ylab = "Count")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+<img src="PA1_template_files/figure-html/unnamed-chunk-5-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 
 ### Calculate and report the mean and median total number of steps taken per day
@@ -84,11 +84,11 @@ activity$interval_f <- as.factor(activity$interval)
 interval_avg_df <- summarise(group_by(activity, interval_f),
                              avg_steps = mean(steps, na.rm=TRUE))
 
-plot(interval_avg_df$interval_f, interval_avg_df$avg_steps, main="Average number steps per 5-min interval", xlab="Time interval", ylab="Average number steps")
+plot(interval_avg_df$interval_f, interval_avg_df$avg_steps, main="Average number of steps per 5-min interval", xlab="Time interval", ylab="Average number of steps")
 lines(interval_avg_df$interval_f, interval_avg_df$avg_steps, type="l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+<img src="PA1_template_files/figure-html/unnamed-chunk-7-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 Find the index where the maximum occurs
 
@@ -166,12 +166,12 @@ new_steps_per_day <- summarise(group_by(new_act, date_f),
 
 # plot a histogram
 hist(new_steps_per_day$totalsteps, 
-           main="New Filled-in data: Histogram of steps per day",
+           main="With new Filled-in data: Histogram of steps per day",
            xlab="Steps per day",
            ylab = "Count")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+<img src="PA1_template_files/figure-html/unnamed-chunk-12-1.png" title="" alt="" style="display: block; margin: auto;" />
 
 ### Calculating mean and median for the new dataset
 
@@ -243,11 +243,11 @@ new_interval_avg_df <- summarise(group_by(new_act, interval_f, day_type),
 print(ggplot(new_interval_avg_df, aes(x=interval_f,y=avg_steps, group=1)) 
       + geom_line() 
       + facet_wrap(~ day_type, ncol=1)
-      + labs(title="Average steps per 5-minute interval", x="Interval", y="Average steps")
+      + labs(title="Average no. of steps per 5-minute interval", x="Interval", y="Average steps")
       + scale_x_discrete(breaks=c(0, 300, 600, 900, 1200, 1500, 1800, 2100, 2355)))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-15-1.png) 
+<img src="PA1_template_files/figure-html/unnamed-chunk-15-1.png" title="" alt="" style="display: block; margin: auto;" />
       
 
 
