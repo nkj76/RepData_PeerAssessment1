@@ -1,9 +1,8 @@
 # Reproducible Research: Peer Assessment 1
 
-
 ## Loading and preprocessing the data
 
-First step, unzip the file
+First step, unzip the data file
 
 ```r
 unzip("activity.zip", setTimes=TRUE)
@@ -40,7 +39,7 @@ library(dplyr)
 
 ## What is mean total number of steps taken per day?
 
-Create a date factor, summarize into a new data frame
+Create a date factor, summarise into a new data frame
 
 ```r
 activity$date_f <- as.factor(activity$date)
@@ -53,7 +52,7 @@ steps_per_day <- summarise(group_by(activity, date_f),
 
 ```r
 hist(steps_per_day$totalsteps, 
-           main="Histogram of steps per day",
+           main="Histogram - steps per day",
            xlab="Steps per day",
            ylab = "Count")
 ```
@@ -84,7 +83,7 @@ activity$interval_f <- as.factor(activity$interval)
 interval_avg_df <- summarise(group_by(activity, interval_f),
                              avg_steps = mean(steps, na.rm=TRUE))
 
-plot(interval_avg_df$interval_f, interval_avg_df$avg_steps, main="Average number of steps per 5-min interval", xlab="Time interval", ylab="Average number of steps")
+plot(interval_avg_df$interval_f, interval_avg_df$avg_steps, main="Average number of steps per 5-minute interval", xlab="Time interval", ylab="Average number of steps")
 lines(interval_avg_df$interval_f, interval_avg_df$avg_steps, type="l")
 ```
 
@@ -166,7 +165,7 @@ new_steps_per_day <- summarise(group_by(new_act, date_f),
 
 # plot a histogram
 hist(new_steps_per_day$totalsteps, 
-           main="With new Filled-in data: Histogram of steps per day",
+           main="With new Filled-In data: Histogram of steps per day",
            xlab="Steps per day",
            ylab = "Count")
 ```
@@ -243,7 +242,7 @@ new_interval_avg_df <- summarise(group_by(new_act, interval_f, day_type),
 print(ggplot(new_interval_avg_df, aes(x=interval_f,y=avg_steps, group=1)) 
       + geom_line() 
       + facet_wrap(~ day_type, ncol=1)
-      + labs(title="Average no. of steps per 5-minute interval", x="Interval", y="Average steps")
+      + labs(title="Average no. of steps per 5-min interval", x="Interval", y="Average steps")
       + scale_x_discrete(breaks=c(0, 300, 600, 900, 1200, 1500, 1800, 2100, 2355)))
 ```
 
